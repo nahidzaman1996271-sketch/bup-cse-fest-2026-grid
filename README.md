@@ -2,7 +2,17 @@
 
 GridWise is a FastAPI service that generates optimal 24-hour energy dispatch schedules for a solar + battery + grid setup. It combines natural-language operator directives with a linear programming solver to produce a cost-minimizing hourly plan.
 
-**Live API:** https://bup-cse-fest-2026-grid.onrender.com
+**Version:** 3.1.0
+
+🟢 **Live and deployed on Render:**
+
+| Resource | URL |
+|---|---|
+| Base URL | https://bup-cse-fest-2026-grid.onrender.com |
+| Health check | https://bup-cse-fest-2026-grid.onrender.com/health |
+| Interactive API docs (Swagger UI) | https://bup-cse-fest-2026-grid.onrender.com/docs |
+
+> **Note:** this runs on Render's free tier, so the service spins down after periods of inactivity. The first request after idle time may take 30–60 seconds to respond while it wakes up.
 
 ## How it works
 
@@ -21,13 +31,15 @@ GridWise is a FastAPI service that generates optimal 24-hour energy dispatch sch
 ## API Endpoints
 
 ### `GET /health`
-Health check. Returns:
+Health check. Try it live: https://bup-cse-fest-2026-grid.onrender.com/health
+
+Returns:
 ```json
 {"status": "ok"}
 ```
 
 ### `POST /optimize-energy`
-Computes the optimal 24-hour schedule.
+Computes the optimal 24-hour schedule. Try it interactively via the Swagger UI: https://bup-cse-fest-2026-grid.onrender.com/docs
 
 **Request body:**
 ```json
@@ -106,4 +118,6 @@ docker run -p 8000:8000 gridwise
 
 ## Deployment
 
-This service is deployed on [Render](https://render.com) using the Docker environment, with **Root Directory** set to `bup` so Render builds from the `Dockerfile` in that folder.
+This service is deployed on [Render](https://render.com) using the Docker environment, with **Root Directory** set to `bup` so Render builds from the `Dockerfile` in that folder. The container listens on the port Render assigns via the `$PORT` environment variable.
+
+Live at: **https://bup-cse-fest-2026-grid.onrender.com**
